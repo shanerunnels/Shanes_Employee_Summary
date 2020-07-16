@@ -45,9 +45,6 @@ function askForRole() {
   ]);
 }
 
-// read inquirer documentation. Let's make it smart.
-// add conditinals to prompt the user
-
 function engineerQuestions() {
   return inquirer.prompt([
     {
@@ -134,7 +131,8 @@ askForRole().then(function (results) {
           results.officeNumber
         )
       );
-      console.log(employeesArray);
+      renderArray = render(employeesArray);
+      outputTeam(renderArray);
     });
   }
   if (results.role === "engineer") {
@@ -147,7 +145,8 @@ askForRole().then(function (results) {
           results.github
         )
       );
-      console.log(employeesArray);
+      renderArray = render(employeesArray);
+      outputTeam(renderArray);
     });
   }
   if (results.role === "intern") {
@@ -160,16 +159,17 @@ askForRole().then(function (results) {
           results.school
         )
       );
-      console.log(employeesArray);
+      renderArray = render(employeesArray);
+      outputTeam(renderArray);
     });
   }
 });
 
-function outputTeam() {
+
+
+function outputTeam(renderArray) {
   if (!fs.existsSync(OUTPUT_DIR)) {
       fs.mkdirSync(OUTPUT_DIR)
   }
-  fs.writeFileSync(outputPath, render(employeesArray), "utf-8");
+  fs.writeFileSync(outputPath, renderArray, "utf-8");
 }
-
-outputTeam();
